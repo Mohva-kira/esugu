@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/jquery/dist/jquery.min.js"
+
+             ]
           },
           "configurations": {
             "production": {
@@ -91,6 +96,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -124,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "esugufront"
+  "defaultProject": "esugufront",
+  "cli": {
+    "analytics": "d26a12cc-bae7-44d3-9029-15cf4d2c7032"
+  }
 }

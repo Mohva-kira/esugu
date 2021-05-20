@@ -1,0 +1,5 @@
+<h1>Shopping Cart ({{calcTotal()}})</h1>
+  <app-cart *ngFor="let product of products" [product]="product" (productRemoved)="removeProduct($event)" ></app-cart>
+<button (click)="checkout(prixTotal)">Payer ({{totalPrix()}}) </button>
+
+
