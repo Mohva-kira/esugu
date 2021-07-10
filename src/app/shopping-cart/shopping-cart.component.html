@@ -1,5 +1,64 @@
 <h1>Shopping Cart ({{calcTotal()}})</h1>
-  <app-cart *ngFor="let product of products" [product]="product" (productRemoved)="removeProduct($event)" ></app-cart>
-<button (click)="checkout(prixTotal)">Payer ({{totalPrix()}}) </button>
+  <div class='credit-info'>
+    <div class='credit-info-content'>
 
+
+    </div>
+
+  </div>
+
+
+
+
+<mat-horizontal-stepper linear #stepper>
+  <mat-step  [editable]="isEditable">
+    <ng-template matStepLabel>Panier</ng-template>
+
+    <app-cart *ngFor="let product of products" [product]="product" (productRemoved)="removeProduct($event)" ></app-cart>
+    <br>
+    <button mat-button matStepperNext>Suivant</button>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <ng-template matStepLabel>Livraison</ng-template>
+    <h3> Saisissez l'adresse de livraison</h3>
+    <form [formGroup]="commandeFrom"  class="form">
+      <mat-form-field>
+        <mat-label>Adresse</mat-label>
+        <input name="adresse" matInput placeholder="adresse" autocomplete="off" formControlName="adresse" required>
+
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Code Postal</mat-label>
+        <input name="codePostal" matInput placeholder="Code Postal" autocomplete="off" formControlName="codePostal" required>
+
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Ville</mat-label>
+        <input name="ville" matInput placeholder="Ville" autocomplete="off" formControlName="ville" required>
+
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Téléphone</mat-label>
+        <input name="Tel" matInput placeholder="Téléphone" autocomplete="off" formControlName="tel" required>
+
+      </mat-form-field>
+      <br>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+
+     </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button [disabled]="!commandeFrom.valid"  (click)="checkout(prixTotal); createOrder()">Payer ({{totalPrix()}}) </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "esugufront": {
+    "sneakersaddict1210": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/esugufront",
+            "outputPath": "dist/sneakersaddict1210",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,13 +28,19 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+
+
+              "src/styles.css",
+              "./node_modules/flexslider/flexslider.css",
+              "./node_modules/font-awesome/css/font-awesome.css"
+
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/jquery/dist/jquery.min.js"
-
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/flexslider/jquery.flexslider.js",
+              "./node_modules/angular/angular.js",
+              "./node_modules/angular-flexslider/angular-flexslider.js"
              ]
           },
           "configurations": {
@@ -70,18 +76,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "esugufront:build"
+            "browserTarget": "sneakersaddict1210:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "esugufront:build:production"
+              "browserTarget": "sneakersaddict1210:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "esugufront:build"
+            "browserTarget": "sneakersaddict1210:build"
           }
         },
         "test": {
@@ -119,18 +125,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "esugufront:serve"
+            "devServerTarget": "sneakersaddict1210:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "esugufront:serve:production"
+              "devServerTarget": "sneakersaddict1210:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "esugufront",
+  "defaultProject": "sneakersaddict1210",
   "cli": {
     "analytics": "d26a12cc-bae7-44d3-9029-15cf4d2c7032"
   }

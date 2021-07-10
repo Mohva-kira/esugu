@@ -1,116 +1,30 @@
-<div *ngIf="product">
-  <div>{{product.nom}}</div>
-  <div>{{product.images[0].url}}</div>
-  <input type="number" [(ngModel)]="product.num" min="0"/>
-</div>
 
-<div class='window' *ngIf="product" >
-  <div class='order-info'>
-    <div class='order-info-content'>
-      <h2>Order Summary</h2>
-              <div class='line'></div>
-      <table class='order-table'>
-        <tbody>
-          <tr>
-            <td><img src='http://localhost:1337{{product.images[0].url}}' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>{{product.nom}}</span>
-              <br> {{product.description}}<br> <span class='thin small'> Color: Grey/Orange, Size: 10.5<br><br></span>
-              <br> <input width="20px" height="20px" type="number" [(ngModel)]="product.num" min="0"/>
-            </td>
 
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>{{product.prix}}</div>
-            </td>
-          </tr>
-        </tbody>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Item Column -->
+  <ng-container matColumnDef="Image">
+    <th mat-header-cell *matHeaderCellDef> Image </th>
+    <td mat-cell *matCellDef="let produit" > <img src="http://localhost:1337{{product.images[0].url}}" alt="" width="50px" height="50px"> </td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+  <ng-container matColumnDef="Article">
+    <th mat-header-cell *matHeaderCellDef> Article </th>
+    <td mat-cell *matCellDef="let produit" > {{produit.nom}} </td>
+    <td mat-footer-cell *matFooterCellDef> &nbsp; </td>
+  </ng-container>
+  <ng-container matColumnDef="Quantite">
+    <th mat-header-cell *matHeaderCellDef> Qauntite </th>
+    <input class="nombre"  *matCellDef="let produit" type="number"  style="width:50px;margin: 30px;"  [(ngModel)]="produit.num" min="0"/>
+    <td mat-footer-cell *matFooterCellDef> &nbsp; </td>
+  </ng-container>
+  <!-- Cost Column -->
+  <ng-container matColumnDef="Prix">
+    <th mat-header-cell *matHeaderCellDef> Prix </th>
+    <td mat-cell *matCellDef="let produit"> {{produit.prix | currency:'EUR'}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{prixTotal | currency:'EUR'}} </td>
+  </ng-container>
 
-      </table>
-      <div class='line'></div>
-      <table class='order-table'>
-        <tbody>
-          <tr>
-            <td><img src='https://dl.dropboxusercontent.com/s/qbj9tsbvthqq72c/Vintage-20L-Backpack-by-Fj%C3%A4llr%C3%A4ven.jpg' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>Fjällräven</span>
-              <br>Vintage Backpack<br> <span class='thin small'> Color: Olive, Size: 20L</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>$235.95</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class='line'></div>
-      <table class='order-table'>
-        <tbody>
-          <tr>
-            <td><img src='https://dl.dropboxusercontent.com/s/nbr4koso8dpoggs/6136C1p5FjL._SL1500_.jpg' class='full-width'>
-            </td>
-            <td>
-              <br> <span class='thin'>Monobento</span>
-              <br>Double Lunchbox<br> <span class='thin small'> Color: Pink, Size: Medium</span>
-            </td>
-
-          </tr>
-          <tr>
-            <td>
-              <div class='price'>$25.95</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class='line'></div>
-      <div class='total'>
-        <span style='float:left;'>
-          <div class='thin dense'>VAT 19%</div>
-          <div class='thin dense'>Delivery</div>
-          TOTAL
-        </span>
-        <span style='float:right; text-align:right;'>
-          <div class='thin dense'>$68.75</div>
-          <div class='thin dense'>$4.95 €</div>
-         {{prixTotal}} €
-        </span>
-      </div>
-</div>
-</div>
-      <div class='credit-info'>
-        <div class='credit-info-content'>
-          <table class='half-input-table'>
-            <tr><td>Please select your card: </td><td><div class='dropdown' id='card-dropdown'><div class='dropdown-btn' id='current-card'>Visa</div>
-              <div class='dropdown-select'>
-              <ul>
-                <li>Master Card</li>
-                <li>American Express</li>
-                </ul></div>
-              </div>
-             </td></tr>
-          </table>
-          <img src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png' height='80' class='credit-card-image' id='credit-card-image'>
-          Card Number
-          <input class='input-field'>
-          Card Holder
-          <input class='input-field'>
-          <table class='half-input-table'>
-            <tr>
-              <td> Expires
-                <input class='input-field'>
-              </td>
-              <td>CVC
-                <input class='input-field'>
-              </td>
-            </tr>
-          </table>
-          <button class='pay-btn'>Checkout</button>
-
-        </div>
-
-      </div>
-    </div>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>

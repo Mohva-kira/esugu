@@ -1,1 +1,27 @@
-<p>appmenu works!</p>
+<button mat-button [matMenuTriggerFor]="animals"><mat-icon>more_vert</mat-icon></button>
+<mat-menu #animals="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="alimentations">Alimentations</button>
+  <button mat-menu-item [matMenuTriggerFor]="vetements">Vêtements</button>
+  <button mat-menu-item >Chaussures</button>
+  <button mat-menu-item >Accessoires</button>
+</mat-menu>
+
+<mat-menu #alimentations="matMenu">
+  <button mat-menu-item >Afrique Ouest </button>
+  <button mat-menu-item >Afrique Nord</button>
+  <button mat-menu-item >Afrique Centre</button>
+
+</mat-menu>
+
+<mat-menu #vetements="matMenu">
+  <button mat-menu-item>Traditionel</button>
+  <button mat-menu-item>Moderne</button>
+  <button mat-menu-item>Occidental</button>
+  <button mat-menu-item>Corals</button>
+  <button mat-menu-item>Arachnids</button>
+  <button mat-menu-item>Velvet worms</button>
+  <button mat-menu-item>Horseshoe crabs</button>
+</mat-menu>
+
+
+

@@ -5,6 +5,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { CommonModelService } from '../common-model.service';
+import { Role } from '../models/role';
+import 'jquery';
 
 @Component({
   selector: 'app-appheader',
@@ -14,27 +16,15 @@ import { CommonModelService } from '../common-model.service';
 export class AppheaderComponent implements OnInit {
   logged: boolean = false;
 
-
+  prixtotal!: number;
   @Input() products!: any[];
   constructor(private authService: AuthService, public dialog: MatDialog ,@Optional() @Inject(MAT_DIALOG_DATA) private data: any, private commModel: CommonModelService) {
 
   }
-  openDialog() {
 
-    const dialogConfig = new MatDialogConfig();
-
-
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {
-      id: 1,
-      products: this.products
-  };
-
-    this.dialog.open(ShoppingCartComponent, dialogConfig);
-
-}
   ngOnInit(): void {
+
+
    if (this.authService.isLoggedIn == true ) {
      this.logged = true;
    }
@@ -46,13 +36,43 @@ export class AppheaderComponent implements OnInit {
 
   calcTotal() {
     this.products = JSON.parse(localStorage.getItem('cart-list')!);
-    return this.products.reduce((acc, prod) => acc+= prod.num ,0)
-  }
+    this.prixtotal= this.products.reduce((acc, prod)=> acc+= prod.num * prod.prix ,0);
+    return this.products.reduce((acc, prod) => acc+= prod.num ,0);
 
+  }
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+
+    dialogConfig.width= '720px';
+    dialogConfig.height='420px';
+
+    dialogConfig.data = {
+      id: 1,
+      products: this.products
+  };
+
+
+
+    this.dialog.open(ShoppingCartComponent, {width:'720px', height:'480px',
+    data: {
+      id: 1,
+      products: this.products
+    }});
+
+}
 
   logout() {
     this.authService.logout();
   }
+  get isAuthorized() {
+    return this.authService.isAuthorized();
+  }
+  get isAdmin() {
+    return this.authService.hasRole(Role.Admin);
+  }
+
 
 }
 

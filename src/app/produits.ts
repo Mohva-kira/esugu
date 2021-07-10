@@ -4,4 +4,7 @@ export class Produit {
   description!: string;
   prix!: number;
   images!: any;
+  categories!: any;
+  genre!: string;
+
 }

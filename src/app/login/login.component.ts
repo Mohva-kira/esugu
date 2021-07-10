@@ -1,8 +1,10 @@
+import { Role } from './../models/role';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import {GC_AUTH_TOKEN, GC_USER_ID} from '../constant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { User } from '../user';
 
 
 @Component({
@@ -14,11 +16,16 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
   loading = false;
+  user!: User ;
   constructor( public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,) { }
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['members']);
+    }
+
   }
 
   login(username: any, password:any) {
@@ -34,6 +41,16 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
+              console.log('utilisateur', data);
+             sessionStorage.setItem('user', data);
+
+
+              if (data.role.id == 1 ) {
+
+                console.log('yess');
+
+               }
+
               this.router.navigate(['members']);
             },
             error => {

@@ -1,32 +1,37 @@
-<!-- login-page -->
-<div class="login-page">
+<div class="head-bread">
   <div class="container">
-    <h3 class="w3ls-title w3ls-title1">Login to your account</h3>
-    <div class="login-body">
-      <form action="#" method="post">
-        <input type="text" class="user" name="email" placeholder="Enter your email"  #userName required>
-        <input type="password" name="password" class="lock" placeholder="Password"  #userPassword required>
-        <input type="submit" value="Login" (click)="login(userName.value, userPassword.value)">
-        <div class="forgot-grid">
-          <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
-          <div class="forgot">
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div class="clearfix"> </div>
-        </div>
-      </form>
-    </div>
-    <h6> Not a Member? <a href="signup.html">Sign Up Now »</a> </h6>
-    <div class="login-page-bottom social-icons">
-      <h5>Recover your social account</h5>
-      <ul>
-        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-        <li><a href="#" class="fa fa-rss icon rss"> </a></li>
-      </ul>
-    </div>
+      <ol class="breadcrumb">
+          <li><a href="index.html">Accueil</a></li>
+          <li class="active">S'inscrire</li>
+      </ol>
   </div>
 </div>
-<!-- //login-page -->
+<!--signup-->
+<!-- login-page -->
+<div class="login">
+  <div class="container">
+      <div class="login-grids">
+          <div class="col-md-6 log">
+                   <h3>Connexion</h3>
+                   <div class="strip"></div>
+                   <p>Bienvenue, veuillez renseigner les champs ci-dessous</p>
+                   <!-- <p>If you have previously Login with us, <a href="#">Click Here</a></p> -->
+                   <form>
+                       <h5>Nom d'utilisateur:</h5>
+                       <input type="text" class="user" name="email" placeholder="Entrer votre email"  #userName required>
+                       <h5>Mot de passe:</h5>
+                       <input type="password" name="password" class="lock" placeholder="Mot de passe"  #userPassword required><br>
+                        <input type="submit" value="Se connecter" (click)="login(userName.value, userPassword.value)">
+                   </form>
+                  <a href="#">Mot de passe oublié ?</a>
+          </div>
+          <div class="col-md-6 login-right">
+                  <h3>Pas encore inscrit ? </h3>
+                  <div class="strip"></div>
+                  <p>En créant un compte sur notre site, Vous serez en mesure de valider votre commande plus rapidement, enregistrer plusieurs adresses de livraison, voir et suivre votre commande dans votre compte.</p>
+                  <a routerLink="/register" class="button">S'inscrire</a>
+          </div>
+          <div class="clearfix"></div>
+      </div>
+  </div>
+</div>

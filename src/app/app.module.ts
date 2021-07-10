@@ -1,8 +1,13 @@
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { MatInputModule } from '@angular/material/input'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,9 +27,17 @@ import { RegisterComponent } from './register/register.component';
 import { InMemoryCache } from '@apollo/client';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MembersComponent } from './members/members.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+import { UserDirective } from './manager/user.directive';
+import { UserRoleDirective } from './manager/usser-role.driective';
+registerLocaleData(localeFr);
+
 
 
 @NgModule({
@@ -41,8 +54,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ShoppingCartComponent,
     ProductComponent,
     RegisterComponent,
-    DashboardComponent,
-    MembersComponent
+
+    MembersComponent,
+    SidebarComponent,
+    UserDirective,
+    UserRoleDirective
   ],
   imports: [
     BrowserModule,
@@ -53,6 +69,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatStepperModule,
+    MatTableModule,
+    NgbModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCarouselModule
+
   ],
   providers: [
     {
@@ -70,6 +96,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthService,
     { provide: MatDialogRef, useValue: {} },
 	{ provide: MAT_DIALOG_DATA, useValue: [] },
+  { provide: LOCALE_ID, useValue: 'fr-FR'},
+  ],exports: [
+    UserDirective,
+    UserRoleDirective
   ],
   bootstrap: [AppComponent],
   entryComponents : [ShoppingCartComponent]

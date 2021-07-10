@@ -1,6 +1,11 @@
 import { Produit } from './../produits';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ApiService } from '../api.service';
+import { Orders } from '../order';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 
 @Component({
@@ -15,13 +20,25 @@ export class CartComponent implements OnInit {
   cartProductList: any[] = [];
   getCartProductList: any;
   @Input() products!: any[];
-  prixTotal!: number;
+  prixTotal: number = 0;
 
-  constructor(public dialog: MatDialog, ) { }
+  displayedColumns: string[] = ['Image','Article', 'Quantite', 'Prix'];
+  dataSource :any =  new MatTableDataSource();
+
+  loading = false;
+  submitted = false;
+  commandeFrom! : FormGroup;
+  constructor(public dialog: MatDialog, private apiService: ApiService, private fb: FormBuilder ) {
+
+
+  }
 
   ngOnInit(): void {
     this.products= JSON.parse(localStorage.getItem('cart-list')!);
+    this.dataSource = new MatTableDataSource(this.products);
     this.totalPrix();
+
+
 
   }
 
@@ -34,20 +51,13 @@ export class CartComponent implements OnInit {
 
 
 
-  addProductToCart(product:any) {
-    const productExistInCart = this.cartProductList.find(({nom}) => nom === product.nom); // find product by name
-    if (!productExistInCart) {
-      this.cartProductList.push({...product, num:1  }); // enhance "porduct" opject with "num" property
-      return;
-    }
-    productExistInCart.num += 1;
-    localStorage.setItem('cart-list', JSON.stringify(productExistInCart));
 
-  }
   removeProduct(product:any) {
     this.cartProductList = this.cartProductList.filter(({nom}) => nom !== product.nom);
     localStorage.setItem('cart-list', JSON.stringify(this.cartProductList));
    }
+
+
    calcTotal() {
 
     return this.products.reduce((acc, prod) => acc+= prod.num ,0)
@@ -56,10 +66,14 @@ export class CartComponent implements OnInit {
   totalPrix() {
 
     this.prixTotal = this.products.reduce((acc, prod) => acc+= prod.prix * prod.num ,0);
-
+    localStorage.setItem('cart-list', JSON.stringify(this.cartProductList));
    return this.products.reduce((acc, prod) => acc+= prod.prix * prod.num ,0);
 
+
   }
+
+
+
 }
 
 

@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+
+app-shopping-cart{
+  display: none;
+}
+
+mat-carousel{
+  display: inline-block;
+  margin: auto;
+  width: 50% ;
+}

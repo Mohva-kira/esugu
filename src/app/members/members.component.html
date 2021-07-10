@@ -1,21 +1,57 @@
-<!-- Sidebar navigation -->
-<div class="container-fluid">
-  <div class="row">
 
+<aside class="profile-card">
+  <header>
+    <!-- here’s the avatar -->
+    <a target="_blank" href="#">
+      <img src="https://st3.depositphotos.com/1020091/12744/v/950/depositphotos_127442070-stock-illustration-fitness-sneakers-icon.jpg" class="hoverZoomLink" />
+    </a>
 
+    <!-- the username -->
+    <h1>
+      {{ user.email }}
+    </h1>
 
-    <!-- Main content -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="inner-adjust">
+    <!-- and role or location -->
+    <h5>Date de création</h5>
+    {{ user.created_at }}
+  </header>
 
-        <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Members</h1>
-        </div>
-
-        <pre>{{ users | json }}</pre>
-
-      </div>
-    </main>
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio" >
+    <p>
+      {{user?.orders }}
+     </p>
+    <div>
+      <h3>Adresse de facturation</h3>
+      {{user.adresse[0].adresse}} <br>
+      {{user.adresse[0].codePostal}},
+      {{user.adresse[0].ville}}, {{user.adresse[0].pays}} <br>
+      {{user.adresse[0].tel}}
+    </div>
 
   </div>
-</div>
+
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    <li>
+      <a target="_blank" href="https://www.facebook.com/creativedonut">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://twitter.com/dropyourbass">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://github.com/vipulsaxena">
+        <i class="fa fa-github"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" href="https://www.behance.net/vipulsaxena">
+        <i class="fa fa-behance"></i>
+      </a>
+    </li>
+  </ul>
+</aside>

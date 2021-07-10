@@ -1,6 +1,9 @@
+import { Orders } from './../order';
+import { ApiService } from './../api.service';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { checkout } from 'stripe-workers/dist/types/resources/checkout/sessions';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 
 
@@ -15,10 +18,27 @@ export class ShoppingCartComponent implements OnInit {
   @Output() productRemoved = new EventEmitter();
   prixTotal!: number;
   strikeCheckout:any = null;
+  loading = false;
+  submitted = false;
+  commandeFrom! : FormGroup;
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
+  isEditable = false;
 
   constructor( private dialogRef: MatDialogRef<ShoppingCartComponent>,
-    @Inject(MAT_DIALOG_DATA) data:any) {
+    @Inject(MAT_DIALOG_DATA) data:any, private apiService: ApiService, private fb: FormBuilder) {
       this.products = data.products;
+
+      this.commandeFrom = this.fb.group({
+        adresse:['', Validators.required],
+        codePostal: ['', Validators.required],
+        ville : ['', Validators.required],
+        tel: ['', Validators.required],
+        // produit: ['', Validators.required],
+        // montant: ['', Validators.required],
+        // user: ['', Validators.required],
+        // status: ['', Validators.required]
+      });
     }
 
   ngOnInit(): void {
@@ -27,6 +47,31 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
+    // Créer une commande
+    createOrder(){
+      let user = JSON.parse(sessionStorage.getItem('user')!);
+      this.submitted = true;
+
+      // stop here if form is invalid
+      // if (this.loginForm.invalid) {
+      //     return;
+      // }
+
+      this.loading = true;
+
+      this.commandeFrom.value.produits= this.products;
+      this.commandeFrom.value.user = user.id;
+      this.commandeFrom.value.montant = this.prixTotal;
+       this.commandeFrom.value.status = 'En attente';
+
+      this.apiService.createOrder(this.commandeFrom.value).subscribe(
+        (order: Orders) => {
+            alert("Commande créer");
+            console.log("Commande ajouté", order);
+
+          });
+
+    }
 
   calcTotal() {
 
@@ -55,11 +100,16 @@ export class ShoppingCartComponent implements OnInit {
     });
 
     strikeCheckout.open({
-      name: 'Esugu Paiement',
-      description: 'Effectuer votre paiement',
-      amount: amount * 100
+      name: 'Sneakers Addict 1210',
+      description: 'Paiement Sécurisé',
+      amount: amount * 100,
+      currency: 'Eur',
+      panelLabel: 'Payer '
     });
+
+
   }
+
 
   stripePaymentGateway() {
     if(!window.document.getElementById('stripe-script')) {
@@ -86,4 +136,6 @@ export class ShoppingCartComponent implements OnInit {
   close() {
     this.dialogRef.close();
 }
+
+
 }
