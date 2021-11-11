@@ -7,7 +7,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -30,12 +30,16 @@ import { HttpLink } from 'apollo-angular/http';
 import { MembersComponent } from './members/members.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarComponent } from './sidebar/sidebar.component';
+
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import localeFr from '@angular/common/locales/fr';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import { UserDirective } from './manager/user.directive';
 import { UserRoleDirective } from './manager/usser-role.driective';
+import {MatCardModule} from '@angular/material/card';
+import { DetailOrderComponent } from './admin/orders/detail-order/detail-order.component';
+import { SidebarlinksComponent } from './sidebarlinks/sidebarlinks.component';
+
 registerLocaleData(localeFr);
 
 
@@ -56,9 +60,12 @@ registerLocaleData(localeFr);
     RegisterComponent,
 
     MembersComponent,
-    SidebarComponent,
     UserDirective,
-    UserRoleDirective
+    UserRoleDirective,
+    SidebarlinksComponent,
+    
+    
+
   ],
   imports: [
     BrowserModule,
@@ -77,7 +84,12 @@ registerLocaleData(localeFr);
     NgbModule,
     MatMenuModule,
     MatIconModule,
-    MatCarouselModule
+    MatCarouselModule,
+    MatCardModule,
+    CommonModule,
+    MatDialogModule
+ 
+
 
   ],
   providers: [
@@ -95,9 +107,10 @@ registerLocaleData(localeFr);
     },
     AuthService,
     { provide: MatDialogRef, useValue: {} },
-	{ provide: MAT_DIALOG_DATA, useValue: [] },
-  { provide: LOCALE_ID, useValue: 'fr-FR'},
-  ],exports: [
+  	{ provide: MAT_DIALOG_DATA, useValue: [] },
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
+     ],
+  exports: [
     UserDirective,
     UserRoleDirective
   ],

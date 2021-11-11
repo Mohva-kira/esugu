@@ -1,3 +1,15 @@
 app-shopping-cart{
   display: none;
 }
+
+
+button {
+  background: #A5E126 ;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  width: 75%;
+}
+
+
+

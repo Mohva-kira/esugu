@@ -21,15 +21,54 @@ export class ApiService {
   constructor(private httpClient: HttpClient, public router: Router,) { }
 
   createOrder(order: Orders) {
-    return this.httpClient.post<Orders>(`${this.authApiBase}/orders`, {
+    return this.httpClient.post<Orders>(`${this.authApiBase}/commandes`, {
       adresse:  order.adresse,
       codePostal: order.codePostal,
       ville: order.ville,
       tel: order.tel,
       produits: order.produits,
       montant: order.montant,
-      user: order.user,
+      users_permissions_user: order.user,
       status: order.status
+
+
+    }
+
+
+    , {
+      headers: {
+        Authorization:
+        ' Bearer ' + this.authToken
+      },
+    })
+      .pipe(map(response => {
+          // login successful if there's a jwt token in the response
+          // if (response.jwt && response.user && response.user.blocked == false) {
+          //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+          //     sessionStorage.setItem('currentUser', JSON.stringify(response.user));
+          //     sessionStorage.setItem('currentJwt', response.jwt);
+
+          // }
+
+          console.log(response);
+
+          return response;
+      }));
+
+
+
+
+  }
+
+  createAdresse(adresse: any){
+    return this.httpClient.post<any>(`${this.authApiBase}/adresses`, {
+      adresse:  adresse.adresse,
+      codePostal: adresse.codePostal,
+      ville: adresse.ville,
+      tel: adresse.tel,
+      pays: adresse.pays,
+      users_permissions_user: adresse.user,
+      isShipping: adresse.isShipping
 
 
     }, {
@@ -51,7 +90,6 @@ export class ApiService {
 
           return response;
       }));
-
   }
 
   getProduits(){

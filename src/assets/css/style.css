@@ -400,14 +400,15 @@ span.fel-fal-bar2{
 }
 .quick-view a {
      font-family: 'Pathway Gothic One';
-    background-color: #A5E126;
+    /* background-color: #A5E126; */
     padding: 5px;
     font-weight: 400;
     text-decoration: none;
     font-size: 16px;
-    color: #1F1818;
+    color: #A5E126;
     text-transform: uppercase;
     display:none;
+    text-shadow: 2px 2px #5b8502;
 }
 .quick-view {
     position: absolute;

@@ -10,3 +10,18 @@ mat-carousel{
   margin: auto;
   width: 50% ;
 }
+
+.flexslider {
+  width: 480px;
+  height: auto ;
+}
+
+.flexslider .slides img {
+  width: 480px;
+  height: auto;
+}
+
+h4{
+  font-size: 25px;
+
+}

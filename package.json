@@ -38,6 +38,7 @@
     "jquery": "^3.6.0",
     "jquery.js": "0.0.2-security",
     "js-cookie": "^2.2.1",
+    "mat-table-filter": "^10.2.0",
     "minicart": "file:minicart",
     "ng-stripe-checkout": "^1.0.4",
     "poper": "^0.1.1",

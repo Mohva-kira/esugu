@@ -4,6 +4,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { checkout } from 'stripe-workers/dist/types/resources/checkout/sessions';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -21,24 +22,32 @@ export class ShoppingCartComponent implements OnInit {
   loading = false;
   submitted = false;
   commandeFrom! : FormGroup;
+  adresseForm!: FormGroup;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   isEditable = false;
+  adresse : any;
 
   constructor( private dialogRef: MatDialogRef<ShoppingCartComponent>,
     @Inject(MAT_DIALOG_DATA) data:any, private apiService: ApiService, private fb: FormBuilder) {
       this.products = data.products;
 
-      this.commandeFrom = this.fb.group({
+      this.adresseForm = this.fb.group({
         adresse:['', Validators.required],
         codePostal: ['', Validators.required],
         ville : ['', Validators.required],
         tel: ['', Validators.required],
+        pays: ['', Validators.required]
         // produit: ['', Validators.required],
         // montant: ['', Validators.required],
         // user: ['', Validators.required],
         // status: ['', Validators.required]
       });
+
+      this.commandeFrom = this.fb.group({
+ 
+
+      })
     }
 
   ngOnInit(): void {
@@ -49,28 +58,53 @@ export class ShoppingCartComponent implements OnInit {
 
     // Créer une commande
     createOrder(){
-      let user = JSON.parse(sessionStorage.getItem('user')!);
+      console.log('user', JSON.parse(sessionStorage.getItem('user')!) )
+      let user : any  = JSON.parse(sessionStorage.getItem('user')!);
       this.submitted = true;
-
+      this.createAdresse();
       // stop here if form is invalid
       // if (this.loginForm.invalid) {
       //     return;
       // }
 
       this.loading = true;
-
+      this.commandeFrom.value.adresse = this.adresse;
       this.commandeFrom.value.produits= this.products;
-      this.commandeFrom.value.user = user.id;
-      this.commandeFrom.value.montant = this.prixTotal;
-       this.commandeFrom.value.status = 'En attente';
+      this.commandeFrom.value.user = user;
+      this.commandeFrom.value.montant = this.prixTotal.toString();
+       this.commandeFrom.value.status = 1;
 
+       console.log(this.commandeFrom.value);
+     
+
+     
       this.apiService.createOrder(this.commandeFrom.value).subscribe(
         (order: Orders) => {
             alert("Commande créer");
             console.log("Commande ajouté", order);
-
+            
+         
           });
 
+          
+
+    }
+
+    createAdresse() {
+      let user : any  = JSON.parse(sessionStorage.getItem('user')!);
+      this.submitted = true;
+
+      this.loading = true;
+      this.adresseForm.value.user = user;
+      this.adresseForm.value.isShipping = true;
+      console.log('youhouu', this.adresseForm.value);
+      this.apiService.createAdresse(this.adresseForm.value).subscribe(
+       (respAdresse: any) => {
+           this.adresse = respAdresse;
+           alert("Adresse créer");
+           console.log("Adresse ajouté", respAdresse);
+
+         });
     }
 
   calcTotal() {

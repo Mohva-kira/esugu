@@ -1,0 +1,20 @@
+<div class="header">
+    <div class="container">
+        <div class="header-top">
+            <div class="logo">
+                <a routerLink="/" href="javascript:void();"> <img src="assets/images/logo.png" width="170px;" height="auto"> </a>
+            </div>
+            <div class="login-bars">
+                <a class="btn btn-default log-bar" *ngIf="!isAuthorized" routerLink="/register"
+                    role="button">S'inscrire</a>
+                <a class="btn btn-default log-bar" *ngIf="!isAuthorized" routerLink="/sign-in" role="button">Se
+                    connecter</a>
+                <a routerLink="/" *ngIf="isAuthorized" class="btn btn-default log-bar" role="button" (click)="logout()">
+                    logout </a>
+               
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

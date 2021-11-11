@@ -18,7 +18,7 @@ export class ListProductComponent implements OnInit {
   error = null;
   minicart : any;
   cartProductList: any[] = [];
-  categProuctlist!:Produit[];
+  categProuctlist!: Produit[];
 
   findedData!: Produit[] ;
 
@@ -34,11 +34,11 @@ export class ListProductComponent implements OnInit {
 
 
   private sub: any;
-  idParam: string = "";
+  idParam = '';
   async ngOnInit(): Promise<void> {
     this.sub = this.route.params.subscribe(async params => {
       this.idParam = params['id'];
-      //make you api call here
+      // make you api call here
       try {
         const response = await axios.get('http://localhost:1337/produits');
         this.products = response.data;
@@ -63,7 +63,7 @@ export class ListProductComponent implements OnInit {
       this.categProuctlist = this.products;
     }else {
 
-      this.categProuctlist = this.products.filter(produit => produit.categories.nom == categories && produit.genre.nom == genre)!;
+      this.categProuctlist = this.products.filter(produit => produit.category.nom === categories && produit.genre.nom === genre)!;
 
     }
 

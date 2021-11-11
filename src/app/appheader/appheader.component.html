@@ -5,12 +5,12 @@
             <a href="index.html">  <img src="assets/images/logo.png" width="170px;" height="auto">  </a>
           </div>
           <div class="login-bars">
-              <a class="btn btn-default log-bar" *ngIf="!logged" routerLink="/register" role="button">S'inscrire</a>
-              <a class="btn btn-default log-bar"  *ngIf="!logged" routerLink="/sign-in" role="button">Se connecter</a>
-              <a  *ngIf="logged" routerLink="/"   class="btn btn-default log-bar" role="button" (click)="logout()">  logout </a>
-              <div class="cd-cart cd-cart--empty js-cd-cart" style="top: 0px;">
+              <a class="btn btn-default log-bar" *ngIf="!isAuthorized" routerLink="/register" role="button">S'inscrire</a>
+              <a class="btn btn-default log-bar"  *ngIf="!isAuthorized" routerLink="/sign-in" role="button">Se connecter</a>
+              <a  *ngIf="isAuthorized" routerLink="/"   class="btn btn-default log-bar" role="button" (click)="logout()">  logout </a>
+              <div class="cd-cart cd-cart--empty js-cd-cart" style="top: 5%;">
                 <a mat-button (click)="openDialog()"class="cd-cart__trigger text-replace">
-                  <i class="fa fa-cart-plus" aria-hidden="true"></i> {{prixtotal| currency:'EUR'}}
+                  <i class="fa fa-cart-plus" aria-hidden="true"></i> {{prixtotal | currency:'EUR'}}
 
                   <ul class="cd-cart__count"> <!-- cart items count -->
                     <li>{{calcTotal()}}</li>

@@ -1,0 +1,46 @@
+<h3>Créer un produit</h3>
+<form #f="ngForm" [formGroup]="produitForm">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Nom produit</mat-label>
+      <input matInput name="nom" formControlName="nom" placeholder="Nom produit">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Prix</mat-label>
+      <input matInput name="prix" formControlName="prix" placeholder="Prix">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description produit</mat-label>
+      <textarea matInput name="description" formControlName="description" placeholder="Nom produit"> </textarea>
+    </mat-form-field>
+
+  </div>
+
+  <label>Image</label>
+  <input name="image" type="file" multiple (change)="handleFileInput($event )">
+
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Catégorie</mat-label>
+      <mat-select formControlName="categorie" multiple>
+
+        <mat-option *ngFor="let categ of categories" [value]="categ.id">{{categ.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+      <mat-label>Genre</mat-label>
+      <mat-radio-group formControlName="genre" aria-label="Select an option">
+        <mat-radio-button value="1">Homme</mat-radio-button>
+        <mat-radio-button value="2">Femme</mat-radio-button>
+      </mat-radio-group>
+
+  
+    
+    
+
+  </div>
+
+  <button mat-raised-button (click)="createProduct(f)">Enregistrer</button>
+</form>

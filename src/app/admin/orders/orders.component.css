@@ -1,0 +1,14 @@
+table {
+  width: 70%;
+  margin: auto;
+  margin-top: 15%;
+}
+
+mat-icon {
+  color: #0abb87;
+}
+
+button {
+  margin: 10px 10px;
+}
+

@@ -1,0 +1,46 @@
+app-appheader, app-appmenu {
+  display: none !important;
+}
+
+.cardre {
+  display: flex;
+  width: 58%;
+  margin: auto;
+  flex-wrap: wrap;
+
+}
+
+.example-card {
+  display: block;
+  max-width: 50%;
+  margin: 40px;
+
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+h2 {
+  text-align: center;
+}
+
+mat-card-header mat-icon {
+  color: #98ca7f;
+  float: right;
+}
+button {
+  display: block;
+  margin: auto !important;
+  width: auto;
+}
+ .revenue{
+  font-size: 16px;
+  float: end;
+
+}
+ .order{
+   width: 70%;
+   margin: auto;
+ }

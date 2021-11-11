@@ -5,14 +5,15 @@
   <title>sneakersaddict1210</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
 
 
   <script type="application/x-javascript"> addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
   <meta charset utf="8">
   <!--fonts-->
   <link href='//fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
-
+  <script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
+  <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
   <!--fonts-->
   <!--bootstrap-->
        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -33,15 +34,22 @@
      <link rel="stylesheet" href="assets/css/flexslider.css" type="text/css" media="screen" />
 
      <script>
+       jQuery.noConflict();
      // Can also be used with $(document).ready()
      $(window).load(function() {
        $('.flexslider').flexslider({
-         animation: "slide",
-         controlNav: "thumbnails"
+         animation: "stop",
+         controlNav: "thumbnails",
+           slideshow: false,
+           touch: true,
        });
+         $('#slider').flexslider("pause")
      });
      </script>
  <!-- //FlexSlider-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="mat-typography">

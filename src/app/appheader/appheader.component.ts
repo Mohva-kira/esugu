@@ -25,9 +25,7 @@ export class AppheaderComponent implements OnInit {
   ngOnInit(): void {
 
 
-   if (this.authService.isLoggedIn == true ) {
-     this.logged = true;
-   }
+ 
 
     this.products = JSON.parse(localStorage.getItem('cart-list')!);
    console.log(this.products);

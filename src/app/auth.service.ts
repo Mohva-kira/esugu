@@ -11,7 +11,7 @@ import { User } from './user';
 // 1
 @Injectable()
 export class AuthService {
-  private user!: User;
+  private user : any = sessionStorage.getItem('user');
     isAuthorized() {
         return !!this.user;
     }
@@ -53,14 +53,12 @@ export class AuthService {
               sessionStorage.setItem('user', JSON.stringify(response.user));
               sessionStorage.setItem('currentJwt', response.jwt);
               this.userData = response.user;
-
               this.authToken = sessionStorage.getItem('currentJwt') !;
               this.currentUserSubject.next(response.user);
           }
 
           return response.user;
       }));
-
   }
   aLeRole(role: Role){
     this.user = {role: role} as any;
@@ -69,7 +67,7 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
-    sessionStorage.removeItem('currentUser');
+    sessionStorage.removeItem('user');
     sessionStorage.removeItem('currentJwt');
     this.currentUserSubject.next(null);
     console.log('sign out');
@@ -117,10 +115,10 @@ forgotPassword(email:any) {
 }
 
 // Returns true when user is looged in and email is verified
-get isLoggedIn(): boolean {
-  const user = JSON.parse(sessionStorage.getItem('currentUser')! );
-  return (user !== null && user.emailVerified !== false) ? true : false;
-}
+// get isLoggedIn(): boolean {
+//   const user = JSON.parse(sessionStorage.getItem('user')! );
+//   return (user !== null && user.emailVerified !== false) ? true : false;
+// }
 
 
 }

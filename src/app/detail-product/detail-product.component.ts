@@ -1,9 +1,9 @@
-import { Produit } from './../produits';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../api.service';
+import {Produit} from './../produits';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from '../api.service';
 import axios from 'axios';
-import { MatCarouselModule } from '@ngmodule/material-carousel';
+import {MatCarouselModule} from '@ngmodule/material-carousel';
 
 @Component({
   selector: 'app-detail-product',
@@ -12,15 +12,19 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 })
 export class DetailProductComponent implements OnInit {
 
-   product!: Produit;
-   cartProductList: any[] = [];
-   findedData!: Produit ;
+  product!: Produit;
+  cartProductList: any[] = [];
+  findedData!: Produit;
   title!: string;
   @Input() products!: any[];
   @Output() productAdded = new EventEmitter();
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  }
+
   private sub: any;
   idParam: string = "";
+
   async ngOnInit(): Promise<void> {
     this.sub = this.route.params.subscribe(async params => {
       this.idParam = params['id'];
@@ -37,40 +41,38 @@ export class DetailProductComponent implements OnInit {
     });
 
 
-
   }
 
   getProduit(): void {
-    const id : any = this.route.snapshot.paramMap.get('id');
+    const id: any = this.route.snapshot.paramMap.get('id');
 
 
-      this.product = this.products.find(produit => produit.id == id)!;
+    this.product = this.products.find(produit => produit.id == id)!;
 
-      console.log(this.product);
+    console.log(this.product);
 
-      if (typeof this.findedData === 'undefined') {
-         return null as any;
-      }
+    if (typeof this.findedData === 'undefined') {
+      return null as any;
+    }
 
-      console.log(this.findedData);
-
-
-
+    console.log(this.findedData);
 
 
   }
-  addProductToCart(product:any) {
+
+  addProductToCart(product: any) {
     this.productAdded.emit(product);
     const productExistInCart = this.cartProductList.find(({nom}) => nom === product.nom); // find product by name
     if (!productExistInCart) {
-      this.cartProductList.push({...product, num:1  }); // enhance "porduct" opject with "num" property
+      this.cartProductList.push({...product, num: 1}); // enhance "porduct" opject with "num" property
       return;
     }
     productExistInCart.num += 1;
 
   }
-  removeProduct(product:any) {
+
+  removeProduct(product: any) {
     this.cartProductList = this.cartProductList.filter(({nom}) => nom !== product.nom);
-   }
+  }
 
 }

@@ -1,7 +1,7 @@
 
 .cd-cart::before {
   content: "";
-  position: fixed;
+  position: absolute;
   z-index: 1;
   height: 100%;
   width: 100%;
@@ -18,7 +18,7 @@
 }
 .cd-cart__trigger,
 .cd-cart__content {
-  position: fixed;
+  position:absolute;
   right: 5%;
   transition: -webkit-transform 0.2s;
   transition: transform 0.2s;

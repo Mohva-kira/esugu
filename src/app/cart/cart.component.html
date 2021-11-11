@@ -1,6 +1,6 @@
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table *ngIf="product" [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Item Column -->
   <ng-container matColumnDef="Image">
     <th mat-header-cell *matHeaderCellDef> Image </th>

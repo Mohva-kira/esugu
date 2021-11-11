@@ -1,0 +1,39 @@
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class=" col-lg-5  grid-margin stretch-card" style="width: 70%;">
+                <!--form mask starts-->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Ajouter un client</h4>
+                        <!-- <p class="card-description">Take a preview of input mask format</p> -->
+                        <form #f = "ngForm" class="forms-sample" [formGroup]="userForm">
+                            <div class="form-group row">
+                                <div class="col"> <label>Nom:</label> <input name="username" formControlName="username" class="form-control" type="text"  > </div>
+                                <div class="col"> <label>Prénom:</label> <input name="prenom" formControlName="prenom" class="form-control" type="text"> </div>
+                            </div>
+                            <div class="form-group"> <label>Email:</label> <input name="email" formControlName="email" class="form-control" data-inputmask="'alias': 'email'"> </div>
+                            <div class="form-group"> <label>Tel:</label> <input name="tel" formControlName="tel" class="form-control" id="phone" data-inputmask="'alias': 'phonebe'"> </div>
+
+                            <div class="form-group row">
+
+                                <div class="col"> <label>Mot de passe</label> <input name="password" formControlName="password" class="form-control" type="password"> </div>
+
+                                <div class="col"> <label>Role</label>
+                                  <select name="role" id="role">
+                                    <option value="3">Administrateur</option>
+                                    <option value="1">Client</option>
+                                </select> </div>
+                            </div>
+
+                            <button mat-raised-button (click)="addUser(f)"> Enrégistrer</button>
+                        </form>
+                    </div>
+                </div>
+                <!--form mask ends-->
+            </div>
+        </div>
+    </div>
+    <!--form mask ends-->
+</div>

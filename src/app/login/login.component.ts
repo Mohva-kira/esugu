@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
     private router: Router,) { }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn) {
-      this.router.navigate(['members']);
-    }
+    // if (this.authService.isAuthorized()) {
+    //   this.router.navigate(['members']);
+    // }
 
   }
 
@@ -37,12 +37,14 @@ export class LoginComponent implements OnInit {
     // }
 
     this.loading = true;
+
+    console.log('requete', username, password);
     this.authService.login(username, password)
         .pipe(first())
         .subscribe(
             data => {
               console.log('utilisateur', data);
-             sessionStorage.setItem('user', data);
+             sessionStorage.setItem('user', JSON.stringify(data));
 
 
               if (data.role.id == 1 ) {
